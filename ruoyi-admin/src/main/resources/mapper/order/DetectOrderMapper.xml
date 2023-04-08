@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.order.mapper.DetectOrderMapper">
+    
+    <resultMap type="DetectOrder" id="DetectOrderResult">
+        <result property="projectId"    column="project_id"    />
+        <result property="sampleId"    column="sample_id"    />
+        <result property="sampleType"    column="sample_type"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="projectCompany"    column="project_company"    />
+        <result property="sampleName"    column="sample_name"    />
+        <result property="level"    column="level"    />
+        <result property="specification"    column="specification"    />
+        <result property="client"    column="client"    />
+        <result property="recipient"    column="recipient"    />
+        <result property="acceptanceDate"    column="acceptance_date"    />
+        <result property="testItems"    column="test_items"    />
+        <result property="conservationMethod"    column="conservation_method"    />
+        <result property="moldingDate"    column="molding_date"    />
+        <result property="price"    column="price"    />
+    </resultMap>
+
+    <sql id="selectDetectOrderVo">
+        select project_id, sample_id, sample_type, project_name, project_company, sample_name, level, specification, client, recipient, acceptance_date, test_items, conservation_method, molding_date, price from detect_order
+    </sql>
+
+    <select id="selectDetectOrderList" parameterType="DetectOrder" resultMap="DetectOrderResult">
+        <include refid="selectDetectOrderVo"/>
+        <where>  
+            <if test="projectId != null  and projectId != ''"> and project_id = #{projectId}</if>
+            <if test="sampleType != null  and sampleType != ''"> and sample_type = #{sampleType}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectCompany != null  and projectCompany != ''"> and project_company = #{projectCompany}</if>
+            <if test="sampleName != null  and sampleName != ''"> and sample_name like concat('%', #{sampleName}, '%')</if>
+            <if test="level != null  and level != ''"> and level = #{level}</if>
+            <if test="specification != null  and specification != ''"> and specification = #{specification}</if>
+            <if test="client != null  and client != ''"> and client = #{client}</if>
+            <if test="recipient != null  and recipient != ''"> and recipient = #{recipient}</if>
+            <if test="acceptanceDate != null  and acceptanceDate != ''"> and acceptance_date = #{acceptanceDate}</if>
+            <if test="testItems != null  and testItems != ''"> and test_items = #{testItems}</if>
+            <if test="conservationMethod != null  and conservationMethod != ''"> and conservation_method = #{conservationMethod}</if>
+            <if test="moldingDate != null  and moldingDate != ''"> and molding_date = #{moldingDate}</if>
+            <if test="price != null "> and price = #{price}</if>
+        </where>
+    </select>
+    
+    <select id="selectDetectOrderBySampleId" parameterType="String" resultMap="DetectOrderResult">
+        <include refid="selectDetectOrderVo"/>
+        where sample_id = #{sampleId}
+    </select>
+        
+    <insert id="insertDetectOrder" parameterType="DetectOrder">
+        insert into detect_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">project_id,</if>
+            <if test="sampleId != null">sample_id,</if>
+            <if test="sampleType != null">sample_type,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="projectCompany != null">project_company,</if>
+            <if test="sampleName != null">sample_name,</if>
+            <if test="level != null">level,</if>
+            <if test="specification != null">specification,</if>
+            <if test="client != null">client,</if>
+            <if test="recipient != null">recipient,</if>
+            <if test="acceptanceDate != null">acceptance_date,</if>
+            <if test="testItems != null">test_items,</if>
+            <if test="conservationMethod != null">conservation_method,</if>
+            <if test="moldingDate != null">molding_date,</if>
+            <if test="price != null">price,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">#{projectId},</if>
+            <if test="sampleId != null">#{sampleId},</if>
+            <if test="sampleType != null">#{sampleType},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="projectCompany != null">#{projectCompany},</if>
+            <if test="sampleName != null">#{sampleName},</if>
+            <if test="level != null">#{level},</if>
+            <if test="specification != null">#{specification},</if>
+            <if test="client != null">#{client},</if>
+            <if test="recipient != null">#{recipient},</if>
+            <if test="acceptanceDate != null">#{acceptanceDate},</if>
+            <if test="testItems != null">#{testItems},</if>
+            <if test="conservationMethod != null">#{conservationMethod},</if>
+            <if test="moldingDate != null">#{moldingDate},</if>
+            <if test="price != null">#{price},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDetectOrder" parameterType="DetectOrder">
+        update detect_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="sampleType != null">sample_type = #{sampleType},</if>
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="projectCompany != null">project_company = #{projectCompany},</if>
+            <if test="sampleName != null">sample_name = #{sampleName},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="specification != null">specification = #{specification},</if>
+            <if test="client != null">client = #{client},</if>
+            <if test="recipient != null">recipient = #{recipient},</if>
+            <if test="acceptanceDate != null">acceptance_date = #{acceptanceDate},</if>
+            <if test="testItems != null">test_items = #{testItems},</if>
+            <if test="conservationMethod != null">conservation_method = #{conservationMethod},</if>
+            <if test="moldingDate != null">molding_date = #{moldingDate},</if>
+            <if test="price != null">price = #{price},</if>
+        </trim>
+        where sample_id = #{sampleId}
+    </update>
+
+    <delete id="deleteDetectOrderBySampleId" parameterType="String">
+        delete from detect_order where sample_id = #{sampleId}
+    </delete>
+
+    <delete id="deleteDetectOrderBySampleIds" parameterType="String">
+        delete from detect_order where sample_id in 
+        <foreach item="sampleId" collection="array" open="(" separator="," close=")">
+            #{sampleId}
+        </foreach>
+    </delete>
+</mapper>
