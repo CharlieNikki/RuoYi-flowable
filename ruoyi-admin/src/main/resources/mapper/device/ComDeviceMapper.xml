@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.device.mapper.ComDeviceMapper">
+    
+    <resultMap type="ComDevice" id="ComDeviceResult">
+        <result property="id"    column="id"    />
+        <result property="devName"    column="dev_name"    />
+        <result property="devCount"    column="dev_count"    />
+        <result property="devCost"    column="dev_cost"    />
+        <result property="devPurchaseTime"    column="dev_purchase_time"    />
+        <result property="devPurchaser"    column="dev_purchaser"    />
+        <result property="devUser"    column="dev_user"    />
+        <result property="devUseDate"    column="dev_use_date"    />
+    </resultMap>
+
+    <sql id="selectComDeviceVo">
+        select id, dev_name, dev_count, dev_cost, dev_purchase_time, dev_purchaser, dev_user, dev_use_date from com_device
+    </sql>
+
+    <select id="selectComDeviceList" parameterType="ComDevice" resultMap="ComDeviceResult">
+        <include refid="selectComDeviceVo"/>
+        <where>  
+            <if test="devName != null  and devName != ''"> and dev_name like concat('%', #{devName}, '%')</if>
+            <if test="devCount != null "> and dev_count = #{devCount}</if>
+            <if test="devCost != null "> and dev_cost = #{devCost}</if>
+            <if test="devPurchaseTime != null  and devPurchaseTime != ''"> and dev_purchase_time = #{devPurchaseTime}</if>
+            <if test="devPurchaser != null  and devPurchaser != ''"> and dev_purchaser = #{devPurchaser}</if>
+            <if test="devUser != null  and devUser != ''"> and dev_user = #{devUser}</if>
+            <if test="devUseDate != null  and devUseDate != ''"> and dev_use_date = #{devUseDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectComDeviceById" parameterType="String" resultMap="ComDeviceResult">
+        <include refid="selectComDeviceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComDevice" parameterType="ComDevice">
+        insert into com_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="devName != null">dev_name,</if>
+            <if test="devCount != null">dev_count,</if>
+            <if test="devCost != null">dev_cost,</if>
+            <if test="devPurchaseTime != null">dev_purchase_time,</if>
+            <if test="devPurchaser != null">dev_purchaser,</if>
+            <if test="devUser != null">dev_user,</if>
+            <if test="devUseDate != null">dev_use_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="devName != null">#{devName},</if>
+            <if test="devCount != null">#{devCount},</if>
+            <if test="devCost != null">#{devCost},</if>
+            <if test="devPurchaseTime != null">#{devPurchaseTime},</if>
+            <if test="devPurchaser != null">#{devPurchaser},</if>
+            <if test="devUser != null">#{devUser},</if>
+            <if test="devUseDate != null">#{devUseDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateComDevice" parameterType="ComDevice">
+        update com_device
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="devName != null">dev_name = #{devName},</if>
+            <if test="devCount != null">dev_count = #{devCount},</if>
+            <if test="devCost != null">dev_cost = #{devCost},</if>
+            <if test="devPurchaseTime != null">dev_purchase_time = #{devPurchaseTime},</if>
+            <if test="devPurchaser != null">dev_purchaser = #{devPurchaser},</if>
+            <if test="devUser != null">dev_user = #{devUser},</if>
+            <if test="devUseDate != null">dev_use_date = #{devUseDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComDeviceById" parameterType="String">
+        delete from com_device where id = #{id}
+    </delete>
+
+    <delete id="deleteComDeviceByIds" parameterType="String">
+        delete from com_device where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

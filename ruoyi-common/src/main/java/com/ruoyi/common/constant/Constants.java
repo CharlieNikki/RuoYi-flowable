@@ -4,11 +4,23 @@ import io.jsonwebtoken.Claims;
 
 /**
  * 通用常量信息
- * 
+ *
  * @author ruoyi
  */
 public class Constants
 {
+
+    /**
+     * 短信验证码 redis key
+     */
+    public static final String SMS_CAPTCHA_CODE_KEY = "sms_captcha_codes:";
+
+
+    /**
+     * 短信验证码有效期（分钟）
+     */
+    public static final Integer SMS_EXPIRATION = 1;
+
     /**
      * UTF-8 字符集
      */
@@ -63,7 +75,7 @@ public class Constants
      * 登录失败
      */
     public static final String LOGIN_FAIL = "Error";
- 
+
     /**
      * 验证码有效期（分钟）
      */
