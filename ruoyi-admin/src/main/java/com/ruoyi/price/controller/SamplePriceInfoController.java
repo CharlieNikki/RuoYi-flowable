@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 样品价格信息Controller
  * 
  * @author Charlie
- * @date 2023-04-11
+ * @date 2023-04-13
  */
 @RestController
 @RequestMapping("/price/priceInfo")

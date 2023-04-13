@@ -5,20 +5,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.price.mapper.SamplePriceInfoMapper">
     
     <resultMap type="SamplePriceInfo" id="SamplePriceInfoResult">
-        <result property="sampleId"    column="sample_id"    />
+        <result property="projectId"    column="project_id"    />
         <result property="sampleName"    column="sample_name"    />
         <result property="samplePrice"    column="sample_price"    />
         <result property="id"    column="id"    />
     </resultMap>
 
     <sql id="selectSamplePriceInfoVo">
-        select sample_id, sample_name, sample_price, id from sample_price_info
+        select project_id, sample_name, sample_price, id from sample_price_info
     </sql>
 
     <select id="selectSamplePriceInfoList" parameterType="SamplePriceInfo" resultMap="SamplePriceInfoResult">
         <include refid="selectSamplePriceInfoVo"/>
         <where>  
-            <if test="sampleId != null  and sampleId != ''"> and sample_id = #{sampleId}</if>
+            <if test="projectId != null  and projectId != ''"> and project_id = #{projectId}</if>
             <if test="sampleName != null  and sampleName != ''"> and sample_name like concat('%', #{sampleName}, '%')</if>
             <if test="samplePrice != null "> and sample_price = #{samplePrice}</if>
         </where>
@@ -32,12 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertSamplePriceInfo" parameterType="SamplePriceInfo" useGeneratedKeys="true" keyProperty="id">
         insert into sample_price_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sampleId != null and sampleId != ''">sample_id,</if>
+            <if test="projectId != null and projectId != ''">project_id,</if>
             <if test="sampleName != null">sample_name,</if>
             <if test="samplePrice != null">sample_price,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="sampleId != null and sampleId != ''">#{sampleId},</if>
+            <if test="projectId != null and projectId != ''">#{projectId},</if>
             <if test="sampleName != null">#{sampleName},</if>
             <if test="samplePrice != null">#{samplePrice},</if>
          </trim>
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateSamplePriceInfo" parameterType="SamplePriceInfo">
         update sample_price_info
         <trim prefix="SET" suffixOverrides=",">
-            <if test="sampleId != null and sampleId != ''">sample_id = #{sampleId},</if>
+            <if test="projectId != null and projectId != ''">project_id = #{projectId},</if>
             <if test="sampleName != null">sample_name = #{sampleName},</if>
             <if test="samplePrice != null">sample_price = #{samplePrice},</if>
         </trim>

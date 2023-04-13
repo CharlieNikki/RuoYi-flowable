@@ -7,7 +7,7 @@ import com.ruoyi.price.domain.SamplePriceInfo;
  * 样品价格信息Service接口
  * 
  * @author Charlie
- * @date 2023-04-11
+ * @date 2023-04-13
  */
 public interface ISamplePriceInfoService 
 {

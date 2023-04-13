@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="样品编号" prop="sampleId">
+      <el-form-item label="委托编号" prop="projectId">
         <el-input
-          v-model="queryParams.sampleId"
-          placeholder="请输入样品编号"
+          v-model="queryParams.projectId"
+          placeholder="请输入委托编号"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -79,7 +79,7 @@
 
     <el-table v-loading="loading" :data="priceInfoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="样品编号" align="center" prop="sampleId" />
+      <el-table-column label="委托编号" align="center" prop="projectId" />
       <el-table-column label="样品名称" align="center" prop="sampleName" />
       <el-table-column label="样品价格" align="center" prop="samplePrice" />
       <el-table-column label="编号" align="center" prop="id" />
@@ -114,8 +114,8 @@
     <!-- 添加或修改样品价格信息对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="样品编号" prop="sampleId">
-          <el-input v-model="form.sampleId" placeholder="请输入样品编号" />
+        <el-form-item label="委托编号" prop="projectId">
+          <el-input v-model="form.projectId" placeholder="请输入委托编号" />
         </el-form-item>
         <el-form-item label="样品名称" prop="sampleName">
           <el-input v-model="form.sampleName" placeholder="请输入样品名称" />
@@ -161,7 +161,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        sampleId: null,
+        projectId: null,
         sampleName: null,
         samplePrice: null,
       },
@@ -169,8 +169,8 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        sampleId: [
-          { required: true, message: "样品编号不能为空", trigger: "blur" }
+        projectId: [
+          { required: true, message: "委托编号不能为空", trigger: "blur" }
         ],
       }
     };
@@ -196,7 +196,7 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-        sampleId: null,
+        projectId: null,
         sampleName: null,
         samplePrice: null,
         id: null

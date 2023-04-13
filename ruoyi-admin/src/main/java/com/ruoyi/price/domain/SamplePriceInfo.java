@@ -10,15 +10,15 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 样品价格信息对象 sample_price_info
  * 
  * @author Charlie
- * @date 2023-04-11
+ * @date 2023-04-13
  */
 public class SamplePriceInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 样品编号 */
-    @Excel(name = "样品编号")
-    private String sampleId;
+    /** 委托编号 */
+    @Excel(name = "委托编号")
+    private String projectId;
 
     /** 样品名称 */
     @Excel(name = "样品名称")
@@ -31,14 +31,14 @@ public class SamplePriceInfo extends BaseEntity
     /** 编号 */
     private Long id;
 
-    public void setSampleId(String sampleId) 
+    public void setProjectId(String projectId) 
     {
-        this.sampleId = sampleId;
+        this.projectId = projectId;
     }
 
-    public String getSampleId() 
+    public String getProjectId() 
     {
-        return sampleId;
+        return projectId;
     }
     public void setSampleName(String sampleName) 
     {
@@ -71,7 +71,7 @@ public class SamplePriceInfo extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("sampleId", getSampleId())
+            .append("projectId", getProjectId())
             .append("sampleName", getSampleName())
             .append("samplePrice", getSamplePrice())
             .append("id", getId())
